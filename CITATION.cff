@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using the metadata below."
+type: software
+title: "Fourth Dynasty Constraint Engine"
+abstract: >-
+  A browser-based throughput model that tests whether the supply-side capacity
+  of Old Kingdom Egypt could have delivered the Fourth Dynasty pyramid
+  programme within its historically attested timelines. The engine treats
+  Sneferu's three pyramids (Meidum, Bent, and Red) and the three at Giza
+  (Khufu, Khafre, and Menkaure), c. 2610-2510 BCE, as a single constrained
+  system, applying Theory of Constraints to quarrying, transport, workforce,
+  and block placement, and implements the Cannibalisation Hypothesis
+  (Choi/Lee, 2026). Developed as a computational instrument for the
+  Constraint-Based Evidence Framework (CBEF).
+authors:
+  - family-names: "Copas"
+    given-names: "Mark"
+version: "4.1"
+date-released: "2026-07-09"
+license: MIT
+repository-code: "https://github.com/YOURNAME/giza-constraint-engine"
+url: "https://github.com/YOURNAME/giza-constraint-engine"
+doi: "10.5281/zenodo.XXXXXXX"
+keywords:
+  - archaeology
+  - Theory of Constraints
+  - throughput modelling
+  - Old Kingdom Egypt
+  - Fourth Dynasty
+  - pyramid construction
+  - Constraint-Based Evidence Framework
