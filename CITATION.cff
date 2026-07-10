@@ -16,11 +16,10 @@ authors:
   - family-names: "Copas"
     given-names: "Mark"
 version: "4.1"
-date-released: "2026-07-09"
+date-released: "2026-07-10"
 license: MIT
-repository-code: "https://github.com/YOURNAME/giza-constraint-engine"
-url: "https://github.com/YOURNAME/giza-constraint-engine"
-doi: "10.5281/zenodo.XXXXXXX"
+repository-code: "https://github.com/markcocoscopas/giza-constraint-engine"
+url: "https://github.com/markcocoscopas/giza-constraint-engine"
 keywords:
   - archaeology
   - Theory of Constraints

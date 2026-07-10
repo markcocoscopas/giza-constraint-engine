@@ -1,7 +1,6 @@
 # Fourth Dynasty Constraint Engine
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.XXXXXXX-blue.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
 
 A browser-based throughput model that tests whether the supply-side capacity of Old Kingdom Egypt could have delivered the Fourth Dynasty pyramid programme within its historically attested timelines.
 
@@ -35,7 +34,7 @@ Anyone running the tool can reproduce the following:
 
 ## Methodology and research context
 
-This engine is a computational instrument for the **Constraint-Based Evidence Framework (CBEF)**, an approach to evaluating disputed claims in archaeology through supply-side throughput and Theory of Constraints rather than assertion. The framework and its application to the Fourth Dynasty are set out in the accompanying methodology papers (Copas, 2026, on Zenodo). Parameter defaults are drawn from Lehner (1997), Stocks (2003), Arnold (1991), Verner (2001), Stadelmann (1997), and Hawass (2003); overbuilt masses follow Choi/Lee (2026).
+This engine is a computational instrument for the **Constraint-Based Evidence Framework (CBEF)**, an approach to evaluating disputed claims in archaeology through supply-side throughput and Theory of Constraints rather than assertion. The framework and its application to the Fourth Dynasty are set out in the accompanying methodology papers (Copas, 2026). Parameter defaults are drawn from Lehner (1997), Stocks (2003), Arnold (1991), Verner (2001), Stadelmann (1997), and Hawass (2003); overbuilt masses follow Choi/Lee (2026).
 
 ## Citation
 
@@ -43,17 +42,13 @@ If you use this tool, please cite it:
 
 ```bibtex
 @software{copas_fourth_dynasty_engine_2026,
-  author    = {Copas, Mark},
-  title     = {Fourth Dynasty Constraint Engine},
-  version   = {4.1},
-  year      = {2026},
-  publisher = {Zenodo},
-  doi       = {10.5281/zenodo.XXXXXXX},
-  url       = {https://github.com/YOURNAME/giza-constraint-engine}
+  author  = {Copas, Mark},
+  title   = {Fourth Dynasty Constraint Engine},
+  version = {4.1},
+  year    = {2026},
+  url     = {https://github.com/markcocoscopas/giza-constraint-engine}
 }
 ```
-
-Replace the DOI and URL once the Zenodo record is minted and the repository is live.
 
 ## Licence
 
