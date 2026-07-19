@@ -222,8 +222,11 @@ function calcDuration(s,c,cann,seas){
   if(eCC+eTC+eAC<=0)return{years:Infinity,binding:"No capacity"};
   var coreM=cann?s.ob*(s.cl/s.tm):s.cl;var turaM=s.cs;var aswnM=s.gr;
   var cY=eCC>0?coreM/eCC:Infinity;var tY=eTC>0?turaM/eTC:Infinity;var aY=eAC>0?aswnM/eAC:Infinity;
-  var maxY=Math.max(cY,tY,aY);var b="Core Quarry";
-  if(tY>=cY&&tY>=aY)b="Tura Supply";if(aY>=cY&&aY>=tY)b="Aswan Granite";
+  var maxY=Math.max(cY,tY,aY);var b;
+  // Name the actual tightest STAGE within the binding chain (not just the chain), so "binding" is the real limiting subsystem.
+  if(maxY===cY){b=eCC===cap.aP?"Placement":eCC===cap.aTr?"Plateau Trnsp":eCC===cap.aDc?"Core Dressing":"Core Quarry";}
+  else if(maxY===tY){b=eTC===cap.aTT?"Tura Transport":eTC===cap.aDt?"Casing Dressing":"Tura Quarry";}
+  else{b=eAC===cap.aAT?"Aswan Transport":eAC===cap.aDa?"Granite Dressing":"Aswan Quarry";}
   var buildY=Math.ceil(maxY);var finY=s.fin||0;
   return{years:buildY+finY,buildYears:buildY,finYears:finY,binding:b}}
 
@@ -272,16 +275,19 @@ function run(st,c,cann,nl,seas){
     d.cDef=Math.max(0,(tCD-ru)-eCC);d.tDef=Math.max(0,tTD-eTC);d.aDef=Math.max(0,tAD-eAC);
     d.totDef=d.cDef+d.tDef+d.aDef;
     if(cann)sorted.forEach(function(s){if(y===s.ey){var sur=s.ob-s.tm;rs+=sur;tr+=sur}});
-    d.ra=rs;var bn=[];
-    if(tCD-ru>cap.aQ)bn.push("Core Quarry");if(tCD-ru>cap.aDc)bn.push("Core Dressing");if(tCD-ru>cap.aTr)bn.push("Plateau Trnsp");
-    if(tCD-ru>cap.aP)bn.push("Placement");
-    if(tTD>cap.aT)bn.push("Tura Quarry");if(tTD>cap.aDt)bn.push("Casing Dressing");if(tTD>cap.aTT)bn.push("Tura Transport");
-    if(tAD>cap.aA)bn.push("Aswan Quarry");if(tAD>cap.aDa)bn.push("Granite Dressing");if(tAD>cap.aAT)bn.push("Aswan Transport");
-    d.bn=bn;d.bc=bn[0]||"None";
+    d.ra=rs;
+    // Binding = the TIGHTEST subsystem this year (highest demand/capacity), i.e. the true limiting constraint.
+    // bn lists every subsystem over capacity; bc is the single tightest.
+    var stg=[["Core Quarry",tCD-ru,cap.aQ],["Core Dressing",tCD-ru,cap.aDc],["Plateau Trnsp",tCD-ru,cap.aTr],["Placement",tCD-ru,cap.aP],
+      ["Tura Quarry",tTD,cap.aT],["Casing Dressing",tTD,cap.aDt],["Tura Transport",tTD,cap.aTT],
+      ["Aswan Quarry",tAD,cap.aA],["Granite Dressing",tAD,cap.aDa],["Aswan Transport",tAD,cap.aAT]];
+    var bn=[],bc="None",bestR=1;
+    stg.forEach(function(x){var r=x[2]>0?x[1]/x[2]:0;if(r>1)bn.push(x[0]);if(r>bestR){bestR=r;bc=x[0]}});
+    d.bn=bn;d.bc=bc;
     d.cU=eCC>0?Math.min(200,((tCD-ru)/eCC)*100):0;d.tU=eTC>0?Math.min(200,(tTD/eTC)*100):0;d.aU=eAC>0?Math.min(200,(tAD/eAC)*100):0;
     res.push(d)}
   var ad=0;res.forEach(function(r){ad+=r.totDef;r.accDef=ad});
-  var bf={};res.forEach(function(r){r.bn.forEach(function(b){bf[b]=(bf[b]||0)+1})});
+  var bf={};res.forEach(function(r){if(r.bc&&r.bc!=="None")bf[r.bc]=(bf[r.bc]||0)+1});// count how often each subsystem is THE binding constraint
   var sum={totD:0,totCap:res.length*(eCC+eTC+eAC),totDef:ad,totR:tr,bf:bf,py:ty,
     dfy:res.filter(function(r){return r.totDef>0}).length,
     avgU:res.length>0?res.reduce(function(s2,r){return s2+r.cU},0)/res.length:0,sb:cap.sb};
