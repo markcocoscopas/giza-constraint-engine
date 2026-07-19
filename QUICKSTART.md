@@ -4,12 +4,14 @@
 
 **Open it:** double-click `giza-constraint-engine_V4_1.html` in any browser. No install, no internet. That's it.
 
+> **What a deficit means:** it shows where a set of capacity estimates is inconsistent with the attested timeline — that the assumed rates were too low, not that the monuments were impossible to build. The engine tests the *numbers*, not the pyramids.
+
 ---
 
 ### 30-second orientation
 
 - **Left sidebar = the inputs** (capacity sliders, workforce, labour split, per-structure params).
-- **Top cards = the headline answer.** The one that matters is **Accumulated Deficit** — if it's above zero, the programme *cannot* be built in the stated timeline at these settings.
+- **Top cards = the headline answer.** The one that matters is **Accumulated Deficit** — above zero means the assumed rates can't meet the stated timeline (so they were too low, or the schedule longer).
 - **Tabs = the detail** behind that answer.
 - Changed too much? Hit **RESET** (top right) to return to defaults.
 
@@ -32,14 +34,14 @@
 
 ### Reading the top cards
 
-- **Accumulated Deficit** — total stone the programme falls short by. **>0 = infeasible.**
+- **Accumulated Deficit** — the gap between demand and the tested capacity. **>0 = the assumed rates fall short.**
 - **Core Util** — average core-chain load. **>100% = over-committed.**
 - **Bottleneck** — the subsystem that binds most often. *This is what to attack.*
 - **Longest Structure** vs **Programme Completion** — one build vs the whole end-to-end programme (they differ; that's expected).
 
 ### The seven tabs
 
-1. **Deficit** — the headline curve. Rising = systemic failure.
+1. **Deficit** — the headline curve. Rising = demand outruns the tested rates.
 2. **Demand/Cap** — annual demand vs the capacity ceiling.
 3. **Bottlenecks** — *which* subsystem fails, and how often (the binding-frequency bars).
 4. **Material Flow** — core / casing / granite demand over time.

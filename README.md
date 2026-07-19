@@ -7,6 +7,8 @@ A browser-based throughput model that tests whether the supply-side capacity of 
 
 The engine treats six major pyramids — Sneferu's three (Meidum, Bent, and Red) and the three at Giza (Khufu, Khafre, and Menkaure), c. 2610–2510 BCE — as a single constrained system, applying Theory of Constraints to quarrying, dressing, transport, workforce, and block placement. The scope is yours to set: analyse the whole programme, a group (Sneferu or Giza), or a single monument in isolation — solo any one build (Meidum through Menkaure), or toggle any combination of structures on and off. It also implements the Cannibalisation Hypothesis (after Choi, presented via Lee, 2026), letting you test whether deliberately overbuilding structures and then carving them down eases the programme deficit or, in fact, worsens it.
 
+> **What a deficit means:** it shows where a set of capacity estimates is inconsistent with the attested timeline — that the assumed rates were too low, not that the monuments were impossible to build. The engine tests the *numbers*, not the pyramids.
+
 ## Running it
 
 No installation, no server, and no internet connection required. Download or clone the repository and double-click **`giza-constraint-engine_V4_1.html`** in any modern browser (Chrome, Firefox, Edge, Safari, or Vivaldi). Everything runs locally with zero external dependencies; fonts fall back gracefully when offline. Saved scenarios persist in the browser between sessions.
