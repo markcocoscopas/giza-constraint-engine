@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Giza Programme Constraint Analysis Engine v3.0</title>
+<title>Fourth Dynasty Constraint Engine v4.1</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
@@ -97,11 +97,53 @@ canvas{width:100%!important;border-radius:4px}
 .preset-row{display:flex;gap:4px;margin-bottom:10px;flex-wrap:wrap}
 .preset-row button{flex:1;padding:5px 4px;font-size:8.5px;font-family:var(--m);border-radius:4px;cursor:pointer;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.45);font-weight:600;min-width:60px}
 .preset-row button:hover{border-color:rgba(212,168,85,0.4);color:#d4a855}
+.tip.open .tt{display:block}
+.tog.present.on{background:rgba(91,152,212,0.2);border-color:rgba(91,152,212,0.5);color:#8fbce8}
+/* ── Presentation Mode ── */
+body.present{overflow:auto}
+body.present .sidebar{display:none}
+body.present .main{padding:26px 40px}
+.pres-wrap{max-width:1180px;margin:0 auto}
+.pres-status{font-size:22px;line-height:1.45;font-weight:600;color:#e4e0d8;border-left:4px solid #cc5500;padding:14px 20px;background:rgba(204,85,0,0.08);border-radius:0 8px 8px 0;margin-bottom:22px}
+.pres-status.ok{border-left-color:#4a9;background:rgba(68,170,153,0.08)}
+.pres-status b{color:#d4a855}
+.pres-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-bottom:22px}
+.pres-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:18px 20px}
+.pres-card.alert{background:rgba(204,85,0,0.10);border-color:rgba(204,85,0,0.35)}
+.pres-card.bind{background:rgba(91,152,212,0.10);border-color:rgba(91,152,212,0.4)}
+.pres-card .pl{font-size:12px;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.45);font-family:var(--m);margin-bottom:8px}
+.pres-card .pn{font-size:40px;font-weight:700;color:#d4a855;font-family:var(--m);line-height:1}
+.pres-card.alert .pn{color:#cc5500}.pres-card.bind .pn{color:#5b98d4}
+.pres-card .ps{font-size:12px;color:rgba(255,255,255,0.4);margin-top:6px}
+.pres-cols{display:grid;grid-template-columns:1.1fr 1fr;gap:22px;align-items:start}
+.pres-ctrls{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:18px 20px}
+.pres-ctrls h3{font-size:13px;text-transform:uppercase;letter-spacing:0.1em;color:rgba(212,168,85,0.7);font-family:var(--m);margin-bottom:14px;font-weight:700}
+.pres-ctrls .slider-row{margin-bottom:14px}
+.pres-ctrls label{font-size:14px;color:rgba(255,255,255,0.7)}
+.pres-ctrls .val{font-size:15px}
+.pres-ctrls input[type=range]{height:5px}
+.pres-ctrls input[type=range]::-webkit-slider-thumb{width:18px;height:18px}
+.pres-ctrls input[type=range]::-moz-range-thumb{width:18px;height:18px}
+.pres-delta{margin-top:16px;font-size:13px;font-family:var(--m);color:rgba(255,255,255,0.6);line-height:1.9;border-top:1px solid rgba(255,255,255,0.07);padding-top:14px}
+.pres-delta .k{color:rgba(255,255,255,0.45)}
+.pres-delta .b0{color:rgba(255,255,255,0.55)}.pres-delta .b1{color:#d4a855;font-weight:700}
+.pres-reset{width:100%;margin-top:16px;background:rgba(255,140,51,0.12);border:1px solid rgba(255,140,51,0.4);border-radius:6px;padding:11px;color:#ff8c33;font-size:13px;font-family:var(--m);font-weight:700;cursor:pointer;letter-spacing:0.04em}
+.pres-reset:hover{background:rgba(255,140,51,0.2)}
+.pres-bind{margin-top:16px;font-size:13px;font-family:var(--m);line-height:1.8}
+.pres-bind .row{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.pres-bind .row.top{color:#5b98d4;font-weight:700}
+/* ── Responsive: small / projection screens ── */
+@media (max-width:900px){
+  body{overflow:auto;height:auto}
+  .layout{flex-direction:column;height:auto}
+  .sidebar{width:100%;min-width:0;border-right:none;border-bottom:1px solid rgba(255,255,255,0.05)}
+  .pres-cols{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
 <div class="header">
-  <div><h1>FOURTH DYNASTY CONSTRAINT ENGINE</h1><div class="sub">v4.0 · SNEFERU → GIZA · QUARRY·DRESS·TRANSPORT·PLACE · CANNIBALISATION · SENSITIVITY</div></div>
+  <div><h1>FOURTH DYNASTY CONSTRAINT ENGINE</h1><div class="sub">v4.1 · SNEFERU → GIZA · QUARRY·DRESS·TRANSPORT·PLACE · CANNIBALISATION · SENSITIVITY</div></div>
   <div class="toggles" id="toggleBar"></div>
 </div>
 <div id="helpBox" class="help-box" style="display:none"></div>
@@ -111,7 +153,9 @@ canvas{width:100%!important;border-radius:4px}
 </div>
 <script>
 "use strict";
-var S={cann:false,nl:true,seas:true,tab:"deficit",showS:false,showHelp:false,scenarios:[],legFilter:{cU:true,tU:true,aU:true},activePreset:"lehner",activeGroup:"all"};
+var S={cann:false,nl:true,seas:true,present:false,tab:"deficit",showS:false,showHelp:false,scenarios:[],legFilter:{cU:true,tU:true,aU:true},activePreset:"lehner",activeGroup:"all"};
+try{var _sv=localStorage.getItem("giza4d_scenarios");if(_sv){var _p=JSON.parse(_sv);if(_p&&_p.length)S.scenarios=_p}}catch(e){}
+function persistSc(){try{localStorage.setItem("giza4d_scenarios",JSON.stringify(S.scenarios))}catch(e){}}
 // ── Structures: Full 4th Dynasty ──
 var structs=[
   {id:"meidum",name:"Meidum Pyramid (Sneferu)",tm:640000,cl:610000,cs:25000,gr:5000,sy:-2610,ey:-2595,ob:900000,fin:0.5,enabled:true},
@@ -130,12 +174,13 @@ var TT={
   cann:"Choi/Lee hypothesis: structures overbuilt then carved down. Surplus stone recycled to next structure in sequence.",
   nl:"Realistic demand curves: core peaks early (big lower courses), casing late (top-down), granite mid-build (chambers).",
   seas:"Three Egyptian seasons: Akhet (flood\u2014more workers, better transport), Peret (normal), Shemu (harvest\u2014reduced capacity).",
-  help:"Show/hide quick reference.",reset:"Reset all to defaults.",
+  help:"Show/hide quick reference.",reset:"Reset all to defaults.",present:"Presentation Mode: enlarged headline numbers, six key levers, auto-highlighted binding subsystem and a baseline→changed→consequence readout for projection.",
   progD:"Total stone across all enabled structures.",annCap:"Annual throughput limited by bottleneck per chain.",
   accDef:"Cumulative shortfall. Above zero = programme cannot complete in stated timelines.",
   priBot:"Subsystem binding most frequently.",avgU:"Avg core utilisation. >100% = over-committed.",
   stoneR:"Stone recycled from overbuilt masses (cannibalisation).",defRed:"Deficit change vs orthodox model.",
-  actDur:"How long construction actually takes at current capacity, ignoring set timeline.",
+  actDur:"Longest SINGLE structure's build+finishing time at current capacity — not the whole programme. For end-to-end programme length see Programme Completion.",
+  progComp:"End-to-end programme length: latest structure finish minus earliest start, using each structure's overrun-adjusted duration at current capacity (historical start years, concurrent building preserved). Compared against the historical span.",
   qr:"Daily core limestone quarrying from Giza/Dahshur plateau quarries.",
   tq:"Daily output from Tura quarries. Fine casing limestone.",
   aq:"Daily output from Aswan quarries, 500mi upstream. Granite.",
@@ -145,7 +190,7 @@ var TT={
   tc:"Daily plateau transport from quarry to site.",
   tt:"Daily Tura transport across Nile. Often binding.",
   at:"Daily Aswan transport, 500mi upstream. Almost always binding.",
-  pr:"Daily block placement rate.",
+  pr:"Placement throughput in TONNES of masonry set per day (not a block count). Compared directly against daily tonnage demand.",
   lD:"% of workforce allocated to dressing/finishing operations.",
   wf:"Peak workforce. Scales quarry/transport/placement proportionally (base: 25,000 = 1.0\u00D7). Tura/Aswan transport is boat-limited, unaffected.",
   wd:"Working days/year. Only applies when seasonal is off.",
@@ -185,30 +230,43 @@ function calcDuration(s,c,cann,seas){
 // ── Reverse Solver ──
 function reverseSolve(s,tgt,c,cann,seas){
   if(tgt<=0)return null;var coreM=cann?s.ob*(s.cl/s.tm):s.cl;
-  var wd=seas?Math.round((120+120+125)*0.9):c.wd;
   // Terminal finishing (Haase) is post-completion: it eats into the reign, compressing the block-laying window.
   var finY=s.fin||0;var buildTgt=Math.max(0.5,tgt-finY);
-  var rC=Math.ceil((coreM/buildTgt)/wd);var rT=Math.ceil((s.cs/buildTgt)/wd);var rA=Math.ceil((s.gr/buildTgt)/wd);
-  return{buildTgt:buildTgt,finY:finY,core:{req:rC,cur:c.qr,ok:rC<=c.qr},coreDr:{req:rC,cur:c.dc,ok:rC<=c.dc},coreTr:{req:rC,cur:c.tc,ok:rC<=c.tc},place:{req:rC,cur:c.pr,ok:rC<=c.pr},
-    tura:{req:rT,cur:c.tq,ok:rT<=c.tq},turaDr:{req:rT,cur:c.dt,ok:rT<=c.dt},turaTr:{req:rT,cur:c.tt,ok:rT<=c.tt},
-    aswan:{req:rA,cur:c.aq,ok:rA<=c.aq},aswanDr:{req:rA,cur:c.da,ok:rA<=c.da},aswanTr:{req:rA,cur:c.at,ok:rA<=c.at}}}
+  // Compare REQUIRED annual throughput against the SAME effective annual capacity the forward engine uses
+  // (sCap bakes in workforce scaling, labour split and seasonal multipliers), so figures are directly comparable.
+  var cap=sCap(c,seas);
+  var reqC=coreM/buildTgt,reqT=s.cs/buildTgt,reqA=s.gr/buildTgt; // tonnes / year
+  function mk(req,cap){return{req:Math.round(req),cur:Math.round(cap),ok:req<=cap}}
+  return{buildTgt:buildTgt,finY:finY,
+    core:mk(reqC,cap.aQ),coreDr:mk(reqC,cap.aDc),coreTr:mk(reqC,cap.aTr),place:mk(reqC,cap.aP),
+    tura:mk(reqT,cap.aT),turaDr:mk(reqT,cap.aDt),turaTr:mk(reqT,cap.aTT),
+    aswan:mk(reqA,cap.aA),aswanDr:mk(reqA,cap.aDa),aswanTr:mk(reqA,cap.aAT)}}
 
 // ── Engine ──
 function run(st,c,cann,nl,seas){
   var active=st.filter(function(s){return s.enabled});
   if(active.length===0)return{res:[],sum:{totD:0,totCap:0,totDef:0,totR:0,bf:{},py:0,dfy:0,avgU:0,sb:null}};
   var res=[],rs=0,tr=0,sorted=active.slice().sort(function(a,b){return a.sy-b.sy});
-  var ps=sorted[0].sy,pe=sorted[sorted.length-1].ey,ty=pe-ps;
+  var ps=sorted[0].sy,pe=sorted[sorted.length-1].ey,ty=pe-ps+1; // inclusive: years ps..pe = pe-ps+1 rows
   if(ty<=0)return{res:[],sum:{totD:0,totCap:0,totDef:0,totR:0,bf:{},py:0,dfy:0,avgU:0,sb:null}};
+  // ── Profile normalisation (mass conservation) ──
+  // Each structure spreads its mass over the SAME inclusive year grid the loop samples (sy..ey).
+  // Divide the profile by the sum of its samples so per-structure demand sums to exactly the entered mass.
+  var norm={};
+  sorted.forEach(function(s){var d=s.ey-s.sy,N=d+1,sC=0,sT=0,sG=0;
+    if(d>0){for(var yy=s.sy;yy<=s.ey;yy++){var f=(yy-s.sy)/d;sC+=dP(f);sT+=cPr(f);sG+=gP(f)}}
+    norm[s.id]={N:N,sC:sC>0?sC:N,sT:sT>0?sT:N,sG:sG>0?sG:N}});
   var cap=sCap(c,seas),eCC=Math.min(cap.aQ,cap.aDc,cap.aTr,cap.aP),eTC=Math.min(cap.aT,cap.aDt,cap.aTT),eAC=Math.min(cap.aA,cap.aDa,cap.aAT);
   for(var y=ps;y<=pe;y++){
     var d={y:y,dy:Math.abs(y)+" BCE",cCap:eCC,tCap:eTC,aCap:eAC,totCap:eCC+eTC+eAC};
     var tCD=0,tTD=0,tAD=0,an=[];
     sorted.forEach(function(s){if(y>=s.sy&&y<=s.ey){
       var nm=s.name.indexOf("(")>-1?s.name.split("(")[1].replace(")",""):s.name.split(" ")[0];
-      an.push(nm);var dur=s.ey-s.sy;if(dur<=0)return;var fr=(y-s.sy)/dur;
-      var cb=cann?s.ob*(s.cl/s.tm):s.cl;var ac=cb/dur,at2=s.cs/dur,aa=s.gr/dur;
-      if(nl){tCD+=ac*dP(fr);tTD+=at2*cPr(fr);tAD+=aa*gP(fr)}else{tCD+=ac;tTD+=at2;tAD+=aa}}});
+      an.push(nm);var dur=s.ey-s.sy;if(dur<=0)return;var fr=(y-s.sy)/dur;var nz=norm[s.id];
+      var cb=cann?s.ob*(s.cl/s.tm):s.cl;
+      // Normalised weights: profile(fr)/Σprofile in non-linear mode; even 1/N split otherwise. Both sum to entered mass.
+      if(nl){tCD+=cb*dP(fr)/nz.sC;tTD+=s.cs*cPr(fr)/nz.sT;tAD+=s.gr*gP(fr)/nz.sG}
+      else{tCD+=cb/nz.N;tTD+=s.cs/nz.N;tAD+=s.gr/nz.N}}});
     var ru=0;if(cann&&rs>0){ru=Math.min(rs,tCD*0.6);rs-=ru}
     d.cD=tCD;d.tD=tTD;d.aD=tAD;d.totD=tCD+tTD+tAD;d.ru=ru;d.effD=d.totD-ru;d.an=an;
     d.cDef=Math.max(0,(tCD-ru)-eCC);d.tDef=Math.max(0,tTD-eTC);d.aDef=Math.max(0,tAD-eAC);
@@ -305,25 +363,26 @@ function enableGroup(g){S.activeGroup=g;structs.forEach(function(s){
   else if(g==="all")s.enabled=true});render()}
 
 // ── Render ──
-function render(){
-  var an=run(structs,C,S.cann,S.nl,S.seas);
-  var bl=S.cann?run(structs,C,false,S.nl,S.seas):null;
-  var res=an.res,sum=an.sum,hasData=res.length>0;
-  var bfs=Object.keys(sum.bf).sort(function(a,b){return sum.bf[b]-sum.bf[a]});
-  var durations=[];var totalActualYrs=0;
-  structs.forEach(function(s){if(s.enabled){var d=calcDuration(s,C,S.cann,S.seas);durations.push({name:s.name,dur:d,setYrs:Math.abs(s.ey-s.sy)});
-    if(d.years>totalActualYrs)totalActualYrs=d.years}});
+// Split so a slider drag can rebuild ONLY the main panel (renderMain / scheduleMain), leaving the
+// sidebar sliders untouched — this removes the mid-drag DOM churn that made sliders feel unstable.
+var _mainQ=false;
+function scheduleMain(){if(_mainQ)return;_mainQ=true;requestAnimationFrame(function(){_mainQ=false;renderMain()})}
+function render(){renderHeader();renderSidebar();renderMain()}
+function shortName(nm){return nm.indexOf("(")>-1?nm.split("(")[1].replace(")",""):nm}
 
+function renderHeader(){
   // Header toggles
   document.getElementById("toggleBar").innerHTML=
     '<button class="tog cann'+(S.cann?" on":"")+'" onclick="S.cann=!S.cann;render()">'+(S.cann?"\u25CF ":"\u25CB ")+'CANNIBALISE '+tip("cann")+'</button>'+
     '<button class="tog'+(S.nl?" on":"")+'" onclick="S.nl=!S.nl;render()">'+(S.nl?"\u25CF ":"\u25CB ")+'NON-LINEAR '+tip("nl")+'</button>'+
     '<button class="tog'+(S.seas?" on":"")+'" onclick="S.seas=!S.seas;render()">'+(S.seas?"\u25CF ":"\u25CB ")+'SEASONAL '+tip("seas")+'</button>'+
+    '<button class="tog present'+(S.present?" on":"")+'" onclick="S.present=!S.present;document.body.classList.toggle(\'present\',S.present);render()">'+(S.present?"\u25CF ":"\u25CB ")+'PRESENT '+tip("present")+'</button>'+
     '<button class="tog" onclick="S.showHelp=!S.showHelp;document.getElementById(\'helpBox\').style.display=S.showHelp?\'block\':\'none\'">?</button>'+
     '<button class="tog" onclick="resetAll()">RESET</button>';
-  document.getElementById("helpBox").innerHTML='<b style="color:#d4a855">Quick Reference:</b> Full Fourth Dynasty model: Sneferu (Meidum, Bent, Red) + Giza (Khufu, Khafre, Menkaure). <b>Enable/Solo</b> isolate structures. <b>Labour %</b> splits workforce across quarry/transport/placement to avoid double-counting. <b>Sensitivity</b> tab auto-runs +25/50/100% stress tests. <b>Cannibalisation</b> models overbuilt stone recycled sequentially.';
+  document.getElementById("helpBox").innerHTML='<b style="color:#d4a855">Quick Reference:</b> Full Fourth Dynasty model: Sneferu (Meidum, Bent, Red) + Giza (Khufu, Khafre, Menkaure). <b>Enable/Solo</b> isolate structures. <b>Labour %</b> splits workforce across quarry/transport/placement to avoid double-counting. <b>Sensitivity</b> tab auto-runs +25/50/100% stress tests. <b>Cannibalisation</b> models overbuilt stone recycled sequentially. <b>Present</b> mode gives a projector-friendly summary.';
+}
 
-  // Sidebar
+function renderSidebar(){
   var sb=document.getElementById("sidebar");
   var wfS=(C.wf/BASE_WF);var labTot=C.lQ+C.lT+C.lD+C.lP;
   sb.innerHTML='<div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.3);margin-bottom:8px;font-family:var(--m)">Presets</div>'+
@@ -332,7 +391,7 @@ function render(){
     slG("Quarrying","qr","Core Limestone",C.qr,50,800,10,"t/d","qr")+slG("","tq","Tura Casing",C.tq,5,120,5,"t/d","tq")+slG("","aq","Aswan Granite",C.aq,2,50,1,"t/d","aq")+
     slG("Dressing \u26A0 provisional","dc","Core (rough)",C.dc,20,800,10,"t/d","dc")+slG("","dt","Casing (fine)",C.dt,2,120,1,"t/d","dt")+slG("","da","Granite (pounded)",C.da,1,50,1,"t/d","da")+
     slG("Transport","tc","Plateau Delivery",C.tc,50,800,10,"t/d","tc")+slG("","tt","Tura \u2192 Site",C.tt,5,100,5,"t/d","tt")+slG("","at","Aswan \u2192 Site",C.at,2,40,1,"t/d","at")+
-    slG("Placement & Workforce","pr","Block Placement",C.pr,50,600,10,"t/d","pr")+
+    slG("Placement & Workforce","pr","Placement (masonry set)",C.pr,50,600,10,"t/d","pr")+
     slG("","wf","Peak Workforce",C.wf,5000,100000,1000,"","wf")+
     '<div style="font-size:8.5px;color:rgba(255,255,255,0.3);font-family:var(--m);margin:-3px 0 6px;padding-left:2px">Scale: '+wfS.toFixed(2)+'\u00D7 (base: '+BASE_WF.toLocaleString()+')</div>'+
     slG("","wd","Working Days/Yr",C.wd,200,365,5,"","wd")+
@@ -343,9 +402,22 @@ function render(){
   if(S.showS)structs.forEach(function(s,i){sb.innerHTML+=structEd(s,i)});
   sb.innerHTML+='<button class="exp-btn" onclick="doCSV()">\u2B07 EXPORT CSV</button>'+
     '<div class="sc-row"><input id="scName" placeholder="Scenario name..." onkeydown="if(event.key===\'Enter\')saveSc()"><button onclick="saveSc()">SAVE</button></div>';
+}
 
-  // Main
+function renderMain(){
   var mp=document.getElementById("mainPanel");
+  if(S.present){var pd=presData();mp.innerHTML=presentShell(pd);requestAnimationFrame(function(){drawPresentChart(pd)});return}
+  var an=run(structs,C,S.cann,S.nl,S.seas);
+  var bl=S.cann?run(structs,C,false,S.nl,S.seas):null;
+  var res=an.res,sum=an.sum,hasData=res.length>0;
+  var bfs=Object.keys(sum.bf).sort(function(a,b){return sum.bf[b]-sum.bf[a]});
+  var durations=[];var totalActualYrs=0;var earliestStart=Infinity,latestFinish=-Infinity;
+  structs.forEach(function(s){if(s.enabled){var d=calcDuration(s,C,S.cann,S.seas);durations.push({name:s.name,dur:d,setYrs:Math.abs(s.ey-s.sy)});
+    if(d.years>totalActualYrs)totalActualYrs=d.years;var fin=s.sy+(isFinite(d.years)?d.years:0);
+    if(s.sy<earliestStart)earliestStart=s.sy;if(fin>latestFinish)latestFinish=fin}});
+  // Programme completion: latest overrun-adjusted finish minus earliest start (historical starts kept, concurrency preserved).
+  var progComplete=hasData&&isFinite(latestFinish)?(latestFinish-earliestStart+1):0;
+  var progOverrun=hasData?progComplete-sum.py:0;
   var defRed=S.cann&&bl&&bl.sum.totDef>0?Math.round(((bl.sum.totDef-sum.totDef)/bl.sum.totDef)*100):0;
   var enCount=structs.filter(function(s){return s.enabled}).length;
 
@@ -353,7 +425,8 @@ function render(){
     cardH("Programme Demand",hasData?ft(sum.totD):"0 t",hasData?sum.py+" yr / "+enCount+" structures":"none","","progD")+
     cardH("Annual Capacity",hasData?ft(res[0].totCap):"0 t","combined","","annCap")+
     cardH("Accumulated Deficit",hasData?ft(sum.totDef):"0 t",sum.totDef>0?sum.dfy+" deficit yrs":"within capacity",sum.totDef>0?"alert":"","accDef")+
-    (hasData?cardH("Actual Duration",totalActualYrs+" yrs",durations.length===1?"for "+durations[0].name.split("(")[1].replace(")",""):"longest structure","dur","actDur"):"")+
+    (hasData?cardH("Longest Structure",totalActualYrs+" yrs",durations.length===1?"for "+shortName(durations[0].name):"single-structure max","dur","actDur"):"")+
+    (hasData&&enCount>1?cardH("Programme Completion",isFinite(progComplete)?progComplete+" yrs":"∞",progOverrun>0?"+"+progOverrun+"y vs historical "+sum.py+"y":"on schedule ("+sum.py+"y)",progOverrun>0?"alert":"dur","progComp"):"")+
     (S.cann?cardH("Recycled",ft(sum.totR),"cannibalisation","hl","stoneR"):"")+
     (S.cann&&bl?cardH("Deficit \u0394",fp(defRed),defRed<0?"worse":"vs orthodox",defRed<0?"alert":"hl","defRed"):"")+
     cardH("Bottleneck",bfs[0]||"None",(sum.bf[bfs[0]]||0)+"y binding","alert","priBot")+
@@ -415,7 +488,7 @@ function render(){
       panel+='</tr>'});
     panel+='</tbody></table></div>';
   }else if(S.tab==="solver"){
-    panel+='<div class="chart-title">Reverse Solver</div><div class="chart-desc">Set target duration per structure. Shows required daily rates.</div>';
+    panel+='<div class="chart-title">Reverse Solver</div><div class="chart-desc">Set target duration per structure. Shows required annual throughput vs modeled effective capacity (same scaling as the forward engine).</div>';
     structs.forEach(function(s,i){if(!s.enabled)return;
       var dur=calcDuration(s,C,S.cann,S.seas);var setDur=Math.abs(s.ey-s.sy);
       panel+='<div class="rev-panel"><div class="rp-title">'+s.name+'</div>';
@@ -427,7 +500,7 @@ function render(){
     panel+='<div class="chart-title">Scenarios</div>';
     if(S.scenarios.length===0)panel+='<div style="padding:30px;text-align:center;color:rgba(255,255,255,0.25)">No scenarios saved.</div>';
     else{panel+='<div style="overflow-x:auto"><table class="data-table"><thead><tr><th>Name</th><th>Demand</th><th>Deficit</th><th>Yrs</th><th>Util</th><th>Recycled</th><th>Bottleneck</th><th></th></tr></thead><tbody>';
-      S.scenarios.forEach(function(s,i){panel+='<tr><td style="color:#d4a855;font-weight:600">'+s.name+'</td><td>'+ft(s.totD)+'</td><td style="color:'+(s.totDef>0?"#cc5500":"inherit")+'">'+ft(s.totDef)+'</td><td>'+s.dfy+'</td><td>'+fp(s.avgU)+'</td><td style="color:'+(s.totR>0?"#4a9":"inherit")+'">'+(s.totR>0?ft(s.totR):"\u2014")+'</td><td>'+s.pb+'</td><td><button onclick="S.scenarios.splice('+i+',1);render()" style="background:none;border:none;color:rgba(255,255,255,0.2);cursor:pointer">\u00D7</button></td></tr>'});
+      S.scenarios.forEach(function(s,i){panel+='<tr><td style="color:#d4a855;font-weight:600">'+s.name+'</td><td>'+ft(s.totD)+'</td><td style="color:'+(s.totDef>0?"#cc5500":"inherit")+'">'+ft(s.totDef)+'</td><td>'+s.dfy+'</td><td>'+fp(s.avgU)+'</td><td style="color:'+(s.totR>0?"#4a9":"inherit")+'">'+(s.totR>0?ft(s.totR):"\u2014")+'</td><td>'+s.pb+'</td><td><button onclick="delSc('+i+')" style="background:none;border:none;color:rgba(255,255,255,0.2);cursor:pointer">\u00D7</button></td></tr>'});
       panel+='</tbody></table></div>'}
   }
   panel+='</div>';
@@ -441,7 +514,7 @@ function render(){
   tbl+='</tbody></table></div></div>'}
 
   mp.innerHTML=cards+tabsH+panel+tbl+
-    '<div class="method"><b style="color:#d4a855">Methodology:</b> Fourth Dynasty constrained throughput model. Six structures (Meidum \u2192 Menkaure). Non-linear demand. Seasonal calendar. Labour allocation prevents double-counting. Cannibalisation: overbuilt masses recycled sequentially, capped 60%/yr. Sensitivity: auto stress-test at +25/50/100%. Capacity = min(quarry, dressing, transport, placement) per ToC. Per-stream dressing (v4): core rough / Tura joint-fitting / Aswan pounded. <b>Casing correction:</b> slow fractions-of-a-mm smoothing is a TERMINAL post-completion phase (Haase 2012 via Arnold: ~2y Khufu, ~1.5y Khafre \u2014 sequential, ramps removed), NOT an in-pipeline per-block rate; it compresses the block-laying window within the reign. Granite per-element dressing remains in-pipeline (Stocks 2003). <b style="color:#cc5500">Dressing rates PROVISIONAL pending Stocks per-block audit.</b> Sources: Arnold (1991; 2023 rep. Haase), Haase (2012, Sokar 25), Lehner (1997), Stocks (2003), Verner (2001), Papers 2\u20134.</div>';
+    '<div class="method"><b style="color:#d4a855">Methodology:</b> Fourth Dynasty constrained throughput model. Six structures (Meidum \u2192 Menkaure). Non-linear demand. Seasonal calendar. Labour allocation prevents double-counting. Cannibalisation: overbuilt masses recycled sequentially, capped 60%/yr. Sensitivity: auto stress-test at +25/50/100%. Capacity = min(quarry, dressing, transport, placement) per ToC. Per-stream dressing (v4): core rough / Tura joint-fitting / Aswan pounded. <b>Casing correction:</b> slow fractions-of-a-mm smoothing is a TERMINAL post-completion phase (Haase 2012 via Arnold: ~2y Khufu, ~1.5y Khafre \u2014 sequential, ramps removed), NOT an in-pipeline per-block rate; it compresses the block-laying window within the reign. Granite per-element dressing remains in-pipeline (Stocks 2003). <b style="color:#cc5500">Dressing rates PROVISIONAL pending Stocks per-block audit.</b> <b>v4.1 corrections:</b> demand profiles are now normalised per structure/stream so Programme Demand conserves the entered masses exactly; programme-year count is inclusive and consistent (rows = years); the reverse solver compares required annual throughput against the same effective capacity as the forward engine; "Longest Structure" and "Programme Completion" are reported separately. Sources: Arnold (1991; 2023 rep. Haase), Haase (2012, Sokar 25), Lehner (1997), Stocks (2003), Verner (2001), Papers 2\u20134.</div>';
 
   // Charts
   if(hasData)requestAnimationFrame(function(){
@@ -464,58 +537,148 @@ function render(){
   });
 }
 
+// ── Presentation Mode ──
+function presData(){
+  var an=run(structs,C,S.cann,S.nl,S.seas);
+  var bl=run(structs,initC,false,S.nl,S.seas); // same structure selection under orthodox (Lehner) capacities — isolates the lever changes
+  var res=an.res,sum=an.sum;
+  var bfs=Object.keys(sum.bf).sort(function(a,b){return sum.bf[b]-sum.bf[a]});
+  var earliestStart=Infinity,latestFinish=-Infinity;
+  structs.forEach(function(s){if(s.enabled){var d=calcDuration(s,C,S.cann,S.seas);
+    var fin=s.sy+(isFinite(d.years)?d.years:0);
+    if(s.sy<earliestStart)earliestStart=s.sy;if(fin>latestFinish)latestFinish=fin}});
+  var progComplete=res.length&&isFinite(latestFinish)?(latestFinish-earliestStart+1):0;
+  return{an:an,bl:bl,res:res,sum:sum,bfs:bfs,progComplete:progComplete,progOverrun:res.length?progComplete-sum.py:0};
+}
+function pcard(label,value,sub,cls){return'<div class="pres-card '+(cls||"")+'"><div class="pl">'+label+'</div><div class="pn">'+value+'</div>'+(sub?'<div class="ps">'+sub+'</div>':'')+'</div>'}
+function presReadoutHTML(d){
+  var sum=d.sum,res=d.res,bfs=d.bfs;
+  if(!res.length)return'<div style="padding:60px;text-align:center;color:rgba(255,255,255,0.3);font-size:18px">Enable at least one structure.</div>';
+  var topB=bfs[0]||"None",topBy=sum.bf[topB]||0,defMt=sum.totDef/1e6;
+  var status=sum.totDef>0
+    ?'<div class="pres-status">Required programme throughput exceeds modeled capacity by <b>'+defMt.toFixed(defMt<10?2:1)+' Mt</b>, with <b>'+topB+'</b> binding for <b>'+topBy+'</b> of '+sum.py+' years.</div>'
+    :'<div class="pres-status ok">Modeled capacity meets programme demand across all <b>'+sum.py+'</b> years — no subsystem binds.</div>';
+  var enCount=structs.filter(function(s){return s.enabled}).length;
+  return status+'<div class="pres-cards">'+
+    pcard("Programme Demand",ft(sum.totD),sum.py+" yr · "+enCount+" structures","")+
+    pcard("Annual Capacity",ft(res[0].totCap),"combined / year","")+
+    pcard("Accumulated Deficit",ft(sum.totDef),sum.totDef>0?sum.dfy+" deficit yrs":"within capacity",sum.totDef>0?"alert":"")+
+    pcard("Programme Completion",d.progComplete?d.progComplete+" yrs":"—",d.progOverrun>0?"+"+d.progOverrun+"y vs historical":"on schedule",d.progOverrun>0?"alert":"")+
+    pcard("Binding Subsystem",topB,topBy+" yrs binding","bind")+
+    '</div>';
+}
+function presRightHTML(d){
+  var sum=d.sum,bfs=d.bfs,bl=d.bl;
+  var h='<div class="chart-panel" style="margin:0 0 14px"><div class="chart-title">Accumulated Deficit</div><canvas id="ch1"></canvas></div>';
+  h+='<div class="pres-bind">';
+  if(!bfs.length)h+='<div class="row" style="color:#4a9">No binding constraints.</div>';
+  else bfs.slice(0,5).forEach(function(nm,i){h+='<div class="row'+(i===0?' top':'')+'"><span>'+nm+'</span><span>'+sum.bf[nm]+'y ('+Math.round(sum.bf[nm]/sum.py*100)+'%)</span></div>'});
+  h+='</div>';
+  var baseDef=bl?bl.sum.totDef:0;
+  var keys=[["qr","Core Quarry","t/d"],["pr","Placement","t/d"],["tt","Tura Transport","t/d"],["at","Aswan Transport","t/d"],["aq","Aswan Quarry","t/d"],["wf","Peak Workforce",""]];
+  var changed="";keys.forEach(function(k){if(C[k[0]]!==initC[k[0]])changed+='<div><span class="k">'+k[1]+':</span> <span class="b0">'+initC[k[0]].toLocaleString()+'</span> → <span class="b1">'+C[k[0]].toLocaleString()+(k[2]?" "+k[2]:"")+'</span></div>'});
+  var pct=baseDef>0?" ("+(sum.totDef<baseDef?"−":"+")+Math.abs(Math.round((sum.totDef-baseDef)/baseDef*100))+"%)":"";
+  h+='<div class="pres-delta"><div style="color:rgba(212,168,85,0.7);font-weight:700;margin-bottom:4px">BASELINE → CHANGED → CONSEQUENCE</div>'+
+    (changed||'<div class="k">No levers changed from orthodox baseline.</div>')+
+    '<div style="margin-top:6px"><span class="k">Deficit:</span> <span class="b0">'+ft(baseDef)+'</span> → <span style="font-weight:700;color:'+(sum.totDef>baseDef?"#cc5500":"#4a9")+'">'+ft(sum.totDef)+'</span>'+pct+'</div>'+
+    '</div>';
+  return h;
+}
+function presSlider(key,label,min,max,step,unit){
+  return'<div class="slider-row"><div class="top"><label>'+label+' '+tip(key)+'</label><span class="val" id="pv_'+key+'">'+C[key].toLocaleString()+(unit?" "+unit:"")+'</span></div>'+
+    '<input type="range" min="'+min+'" max="'+max+'" step="'+step+'" value="'+C[key]+'" oninput="presTweak(\''+key+'\',this.value,\''+(unit||"")+'\')"></div>';
+}
+function presentShell(d){
+  return'<div class="pres-wrap"><div id="presReadout">'+presReadoutHTML(d)+'</div>'+
+    (d.res.length?'<div class="pres-cols"><div class="pres-ctrls"><h3>Key Levers (6)</h3>'+
+      presSlider("qr","Core Quarry",50,800,10,"t/d")+
+      presSlider("pr","Placement",50,600,10,"t/d")+
+      presSlider("tt","Tura Transport",5,100,5,"t/d")+
+      presSlider("at","Aswan Transport",2,40,1,"t/d")+
+      presSlider("aq","Aswan Quarry",2,50,1,"t/d")+
+      presSlider("wf","Peak Workforce",5000,100000,1000,"")+
+      '<button class="pres-reset" onclick="resetAll()">↺ ORTHODOX BASELINE</button>'+
+      '</div><div id="presRight">'+presRightHTML(d)+'</div></div>':'')+
+    '</div>';
+}
+function drawPresentChart(d){
+  if(!d.res.length)return;
+  drawChart("ch1",d.res,[{key:"accDef",type:"area",color:COL.deficit,fill:"rgba(204,85,0,0.15)",width:2.5}],{height:240});
+}
+function presTweak(key,val,unit){
+  C[key]=Number(val);S.activePreset="";
+  var lbl=document.getElementById("pv_"+key);if(lbl)lbl.textContent=Number(val).toLocaleString()+(unit?" "+unit:"");
+  if(presTweak._raf)return;presTweak._raf=true; // coalesce readout rebuilds; controls column is left untouched so drag stays smooth
+  requestAnimationFrame(function(){presTweak._raf=false;var d=presData();
+    var ro=document.getElementById("presReadout");if(ro)ro.innerHTML=presReadoutHTML(d);
+    var rt=document.getElementById("presRight");if(rt){rt.innerHTML=presRightHTML(d);drawPresentChart(d)}});
+}
+
 function updateSolver(idx,tgt){
   var el=document.getElementById("solverResult"+idx);var lbl=document.getElementById("tgt"+idx);
   if(!el)return;if(lbl)lbl.textContent=tgt+" yrs";
   var s=structs[idx],rv=reverseSolve(s,tgt,C,S.cann,S.seas);if(!rv)return;
-  var winNote='<div style="font-size:9px;font-family:var(--m);color:rgba(255,255,255,0.5);margin:2px 0 8px;padding:5px 8px;background:rgba(212,168,85,0.06);border:1px solid rgba(212,168,85,0.12);border-radius:4px">Reign window <b style="color:#d4a855">'+tgt+' yrs</b> \u2212 terminal finishing <b style="color:#cc5500">'+rv.finY+' yrs</b> (Haase) = block-laying window <b style="color:#5b98d4">'+rv.buildTgt+' yrs</b>. Required rates below are computed over the laying window.</div>';
-  var items=[{l:"Core Quarry",r:rv.core.req,c:rv.core.cur,u:"t/d",ok:rv.core.ok},{l:"Core Dressing",r:rv.coreDr.req,c:rv.coreDr.cur,u:"t/d",ok:rv.coreDr.ok},{l:"Plateau Trnsp",r:rv.coreTr.req,c:rv.coreTr.cur,u:"t/d",ok:rv.coreTr.ok},
-    {l:"Placement",r:rv.place.req,c:rv.place.cur,u:"t/d",ok:rv.place.ok},{l:"Tura Quarry",r:rv.tura.req,c:rv.tura.cur,u:"t/d",ok:rv.tura.ok},
-    {l:"Casing Dressing",r:rv.turaDr.req,c:rv.turaDr.cur,u:"t/d",ok:rv.turaDr.ok},{l:"Tura Trnsp",r:rv.turaTr.req,c:rv.turaTr.cur,u:"t/d",ok:rv.turaTr.ok},{l:"Aswan Quarry",r:rv.aswan.req,c:rv.aswan.cur,u:"t/d",ok:rv.aswan.ok},
-    {l:"Granite Dressing",r:rv.aswanDr.req,c:rv.aswanDr.cur,u:"t/d",ok:rv.aswanDr.ok},{l:"Aswan Trnsp",r:rv.aswanTr.req,c:rv.aswanTr.cur,u:"t/d",ok:rv.aswanTr.ok}];
+  var winNote='<div style="font-size:9px;font-family:var(--m);color:rgba(255,255,255,0.5);margin:2px 0 8px;padding:5px 8px;background:rgba(212,168,85,0.06);border:1px solid rgba(212,168,85,0.12);border-radius:4px">Reign window <b style="color:#d4a855">'+tgt+' yrs</b> \u2212 terminal finishing <b style="color:#cc5500">'+rv.finY+' yrs</b> (Haase) = block-laying window <b style="color:#5b98d4">'+rv.buildTgt+' yrs</b>. Required annual throughput below is compared against modeled effective capacity (same workforce/labour/seasonal scaling as the forward engine).</div>';
+  var items=[{l:"Core Quarry",r:rv.core.req,c:rv.core.cur,u:"/yr",ok:rv.core.ok},{l:"Core Dressing",r:rv.coreDr.req,c:rv.coreDr.cur,u:"/yr",ok:rv.coreDr.ok},{l:"Plateau Trnsp",r:rv.coreTr.req,c:rv.coreTr.cur,u:"/yr",ok:rv.coreTr.ok},
+    {l:"Placement",r:rv.place.req,c:rv.place.cur,u:"/yr",ok:rv.place.ok},{l:"Tura Quarry",r:rv.tura.req,c:rv.tura.cur,u:"/yr",ok:rv.tura.ok},
+    {l:"Casing Dressing",r:rv.turaDr.req,c:rv.turaDr.cur,u:"/yr",ok:rv.turaDr.ok},{l:"Tura Trnsp",r:rv.turaTr.req,c:rv.turaTr.cur,u:"/yr",ok:rv.turaTr.ok},{l:"Aswan Quarry",r:rv.aswan.req,c:rv.aswan.cur,u:"/yr",ok:rv.aswan.ok},
+    {l:"Granite Dressing",r:rv.aswanDr.req,c:rv.aswanDr.cur,u:"/yr",ok:rv.aswanDr.ok},{l:"Aswan Trnsp",r:rv.aswanTr.req,c:rv.aswanTr.cur,u:"/yr",ok:rv.aswanTr.ok}];
   var html=winNote+'<div class="rev-result">';
   items.forEach(function(it){var m=it.c>0?(it.r/it.c).toFixed(1)+"x":"n/a";
-    html+='<div class="rev-item"><div class="rl">'+it.l+'</div><div class="rv '+(it.ok?"ok":"up")+'">'+it.r.toLocaleString()+' '+it.u+'</div><div class="rc">Now: '+it.c.toLocaleString()+' \u00B7 '+(it.ok?"\u2713":"Need "+m)+'</div></div>'});
+    html+='<div class="rev-item"><div class="rl">'+it.l+'</div><div class="rv '+(it.ok?"ok":"up")+'">'+ft(it.r)+it.u+'</div><div class="rc">Cap: '+ft(it.c)+it.u+' \u00B7 '+(it.ok?"\u2713":"Need "+m)+'</div></div>'});
   el.innerHTML=html+'</div>'}
 
 // ── Helpers ──
 function slG(sect,key,label,val,min,max,step,unit,ttKey){
   return(sect?'<div class="section-label" style="margin-top:8px">'+sect+'</div>':'')+
-    '<div class="slider-row"><div class="top"><label>'+label+' '+(ttKey?tip(ttKey):"")+'</label><span class="val">'+val.toLocaleString()+(unit?" "+unit:"")+'</span></div>'+
-    '<input type="range" min="'+min+'" max="'+max+'" step="'+step+'" value="'+val+'" oninput="S.activePreset=\'\';C.'+key+'=Number(this.value);render()"></div>'}
+    '<div class="slider-row"><div class="top"><label>'+label+' '+(ttKey?tip(ttKey):"")+'</label><span class="val" id="cv_'+key+'">'+val.toLocaleString()+(unit?" "+unit:"")+'</span></div>'+
+    // oninput updates main only (sidebar slider stays put); onchange (release) does a full render to reconcile preset/labour readouts
+    '<input type="range" min="'+min+'" max="'+max+'" step="'+step+'" value="'+val+'" oninput="setC(\''+key+'\',this.value,\''+(unit||"")+'\')" onchange="render()"></div>'}
+function setC(key,val,unit){
+  C[key]=Number(val);S.activePreset="";
+  var el=document.getElementById("cv_"+key);if(el)el.textContent=Number(val).toLocaleString()+(unit?" "+unit:"");
+  scheduleMain();
+}
 function cardH(label,value,sub,cls,ttKey){
   return'<div class="card '+(cls||"")+'"><div class="lbl"><span>'+label+'</span>'+(ttKey?tip(ttKey):"")+'</div><div class="num">'+value+'</div>'+(sub?'<div class="sub">'+sub+'</div>':'')+'</div>'}
 function structEd(s,i){
   var dur=calcDuration(s,C,S.cann,S.seas);var setY=Math.abs(s.ey-s.sy);var over=dur.years>setY;
-  var p='structs['+i+']';
   return'<div class="struct-ed'+(s.enabled?"":" disabled")+'"><div class="sname"><span>'+s.name+'</span><span style="display:flex;gap:3px">'+
     '<button class="s-btn '+(s.enabled?"on":"")+'" onclick="event.stopPropagation();S.activeGroup=\'\';structs['+i+'].enabled=!structs['+i+'].enabled;render()">'+(s.enabled?"On":"Off")+'</button>'+
     '<button class="s-btn solo" onclick="event.stopPropagation();soloStruct('+i+')">Solo</button></span></div>'+
     '<div class="struct-grid">'+
-    sEd(p,"tm","Total Mass",s.tm,100000,10000000,50000,"t")+sEd(p,"cl","Core",s.cl,50000,8000000,50000,"t")+
-    sEd(p,"cs","Tura",s.cs,10000,1000000,10000,"t")+sEd(p,"gr","Granite",s.gr,5000,500000,5000,"t")+
-    (S.cann?sEd(p,"ob","Overbuilt",s.ob,s.tm,15000000,100000,"t"):"")+
-    sEd(p,"sy","Start BCE",Math.abs(s.sy),2400,2620,1,"",true)+sEd(p,"ey","End BCE",Math.abs(s.ey),2400,2620,1,"",true)+
-    sEd(p,"fin","Finishing yrs",s.fin,0,4,0.5,"y")+
+    sEd(i,"tm","Total Mass",s.tm,100000,10000000,50000,"t")+sEd(i,"cl","Core",s.cl,50000,8000000,50000,"t")+
+    sEd(i,"cs","Tura",s.cs,10000,1000000,10000,"t")+sEd(i,"gr","Granite",s.gr,5000,500000,5000,"t")+
+    (S.cann?sEd(i,"ob","Overbuilt",s.ob,s.tm,15000000,100000,"t"):"")+
+    sEd(i,"sy","Start BCE",Math.abs(s.sy),2400,2620,1,"",true)+sEd(i,"ey","End BCE",Math.abs(s.ey),2400,2620,1,"",true)+
+    sEd(i,"fin","Finishing yrs",s.fin,0,4,0.5,"y")+
     '</div><div class="dur-box">Actual duration: <span class="dv">'+dur.years+' yrs</span> (set: '+setY+') \u2014 build '+dur.buildYears+'y + finishing '+dur.finYears+'y'+(over?'<div class="warn">\u26A0 Overrun: '+(dur.years-setY)+'y. Bound by '+dur.binding+'</div>':'<div style="color:#4a9;font-size:8.5px;margin-top:1px">\u2713 Achievable</div>')+'</div></div>'}
-function sEd(p,key,label,val,min,max,step,unit,neg){
-  return'<div class="slider-row"><div class="top"><label>'+label+'</label><span class="val">'+val.toLocaleString()+(unit?" "+unit:"")+'</span></div>'+
-    '<input type="range" min="'+min+'" max="'+max+'" step="'+step+'" value="'+val+'" oninput="'+p+'.'+key+'='+(neg?"-":"")+'Number(this.value);render()"></div>'}
+function sEd(i,key,label,val,min,max,step,unit,neg){
+  return'<div class="slider-row"><div class="top"><label>'+label+'</label><span class="val" id="sv_'+i+'_'+key+'">'+val.toLocaleString()+(unit?" "+unit:"")+'</span></div>'+
+    '<input type="range" min="'+min+'" max="'+max+'" step="'+step+'" value="'+val+'" oninput="setStruct('+i+',\''+key+'\',this.value,'+(neg?"true":"false")+',\''+(unit||"")+'\')" onchange="render()"></div>'}
+function setStruct(i,key,val,neg,unit){
+  structs[i][key]=(neg?-1:1)*Number(val);
+  var el=document.getElementById("sv_"+i+"_"+key);if(el)el.textContent=Number(val).toLocaleString()+(unit?" "+unit:"");
+  scheduleMain();
+}
 function soloStruct(idx){S.activeGroup="";structs.forEach(function(s,i){s.enabled=(i===idx)});render()}
 function toggleLeg(key){S.legFilter[key]=!S.legFilter[key];render()}
 function resetAll(){structs=JSON.parse(JSON.stringify(initStructs));C=JSON.parse(JSON.stringify(initC));S.legFilter={cU:true,tU:true,aU:true};S.activePreset="lehner";S.activeGroup="all";render()}
+// RFC-4180 quoting: wrap in quotes and double internal quotes for any field containing a comma, quote or newline.
+function csvCell(v){v=(v==null?"":String(v));return /[",\n\r]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v}
 function doCSV(){
   var an=run(structs,C,S.cann,S.nl,S.seas),res=an.res;if(!res.length)return;
-  var hd=["Year","Demand","Core","Tura","Aswan"];if(S.cann)hd.push("Recycled");hd.push("Capacity","Deficit","AccDef","CoreUtil%","Binding");
-  var rows=res.map(function(r){var row=[r.dy,Math.round(r.totD),Math.round(r.cD),Math.round(r.tD),Math.round(r.aD)];if(S.cann)row.push(Math.round(r.ru));
-    row.push(Math.round(r.totCap),Math.round(r.totDef),Math.round(r.accDef),r.cU.toFixed(1),'"'+r.bc+'"');return row.join(",")});
-  var blob=new Blob([[hd.join(",")].concat(rows).join("\n")],{type:"text/csv"});
+  var hd=["Year","Active","Demand","Core","Tura","Aswan"];if(S.cann)hd.push("Recycled");hd.push("Capacity","Deficit","AccDef","CoreUtil%","Binding");
+  var rows=res.map(function(r){var row=[r.dy,r.an.join("; "),Math.round(r.totD),Math.round(r.cD),Math.round(r.tD),Math.round(r.aD)];if(S.cann)row.push(Math.round(r.ru));
+    row.push(Math.round(r.totCap),Math.round(r.totDef),Math.round(r.accDef),r.cU.toFixed(1),r.bc);return row.map(csvCell).join(",")});
+  var blob=new Blob([[hd.map(csvCell).join(",")].concat(rows).join("\r\n")],{type:"text/csv"});
   var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="giza4d_"+new Date().toISOString().slice(0,10)+".csv";a.click()}
 function saveSc(){
   var nm=(document.getElementById("scName")||{}).value||"";nm=nm.trim()||"Scenario "+(S.scenarios.length+1);
   var an=run(structs,C,S.cann,S.nl,S.seas),sum=an.sum;
   var bk=Object.keys(sum.bf).sort(function(a,b){return sum.bf[b]-sum.bf[a]});
-  S.scenarios.push({name:nm,totD:sum.totD,totDef:sum.totDef,dfy:sum.dfy,avgU:sum.avgU,totR:sum.totR,pb:bk[0]||"None"});render()}
+  S.scenarios.push({name:nm,totD:sum.totD,totDef:sum.totDef,dfy:sum.dfy,avgU:sum.avgU,totR:sum.totR,pb:bk[0]||"None"});persistSc();render()}
+function delSc(i){S.scenarios.splice(i,1);persistSc();render()}
 window.addEventListener("resize",function(){render()});
 render();
 </script>
