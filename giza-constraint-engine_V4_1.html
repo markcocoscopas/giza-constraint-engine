@@ -176,7 +176,7 @@ var TT={
   seas:"Three Egyptian seasons: Akhet (flood\u2014more workers, better transport), Peret (normal), Shemu (harvest\u2014reduced capacity).",
   help:"Show/hide quick reference.",reset:"Reset all to defaults.",present:"Presentation Mode: enlarged headline numbers, six key levers, auto-highlighted binding subsystem and a baseline→changed→consequence readout for projection.",
   progD:"Total stone across all enabled structures.",annCap:"Annual throughput limited by bottleneck per chain.",
-  accDef:"Cumulative shortfall. Above zero = programme cannot complete in stated timelines.",
+  accDef:"Cumulative gap between demand and the tested capacity. Above zero means THESE assumed rates cannot deliver the programme in the attested timeline — evidence the real rates were higher than assumed (or the schedule longer), NOT that the monuments could not be built.",
   priBot:"Subsystem binding most frequently.",avgU:"Avg core utilisation. >100% = over-committed.",
   stoneR:"Stone recycled from overbuilt masses (cannibalisation).",defRed:"Deficit change vs orthodox model.",
   actDur:"Longest SINGLE structure's build+finishing time at current capacity — not the whole programme. For end-to-end programme length see Programme Completion.",
@@ -385,7 +385,7 @@ function renderHeader(){
     '<button class="tog present'+(S.present?" on":"")+'" onclick="S.present=!S.present;document.body.classList.toggle(\'present\',S.present);render()">'+(S.present?"\u25CF ":"\u25CB ")+'PRESENT '+tip("present")+'</button>'+
     '<button class="tog" onclick="S.showHelp=!S.showHelp;document.getElementById(\'helpBox\').style.display=S.showHelp?\'block\':\'none\'">?</button>'+
     '<button class="tog" onclick="resetAll()">RESET</button>';
-  document.getElementById("helpBox").innerHTML='<b style="color:#d4a855">Quick Reference:</b> Full Fourth Dynasty model: Sneferu (Meidum, Bent, Red) + Giza (Khufu, Khafre, Menkaure). <b>Enable/Solo</b> isolate structures. <b>Labour %</b> splits workforce across quarry/transport/placement to avoid double-counting. <b>Sensitivity</b> tab auto-runs +25/50/100% stress tests. <b>Cannibalisation</b> models overbuilt stone recycled sequentially. <b>Present</b> mode gives a projector-friendly summary.';
+  document.getElementById("helpBox").innerHTML='<b style="color:#d4a855">Quick Reference:</b> Full Fourth Dynasty model: Sneferu (Meidum, Bent, Red) + Giza (Khufu, Khafre, Menkaure). <b>Enable/Solo</b> isolate structures. <b>Labour %</b> splits workforce across quarry/transport/placement to avoid double-counting. <b>Sensitivity</b> tab auto-runs +25/50/100% stress tests. <b>Cannibalisation</b> models overbuilt stone recycled sequentially. <b>Present</b> mode gives a projector-friendly summary. <b style="color:#d4a855">A deficit tests the numbers, not the pyramids:</b> it shows where a set of capacity estimates is inconsistent with the attested timeline (rates must have been higher, or the schedule longer) — never that a monument could not be built.';
 }
 
 function renderSidebar(){
@@ -446,7 +446,7 @@ function renderMain(){
   var panel='<div class="chart-panel">';
   if(!hasData){panel+='<div style="padding:40px;text-align:center;color:rgba(255,255,255,0.25);font-size:13px">Enable at least one structure.</div>'}
   else if(S.tab==="deficit"){
-    panel+='<div class="chart-title">Accumulated Deficit</div><div class="chart-desc">Rising curve = systemic constraint failure.'+(S.cann?' <span style="color:#cc5500">\u2501 Solid</span> = cannibalised. <span style="color:#ff8c33">\u2504 Dashed</span> = orthodox. Gap = recycling impact.':'')+'</div>';
+    panel+='<div class="chart-title">Accumulated Deficit</div><div class="chart-desc">Rising curve = demand outruns the tested capacity. Read it as: these assumed rates cannot meet the attested timeline, so the real rates must have been higher (or the schedule longer) — it locates where an estimate set is too low, not that the build was impossible.'+(S.cann?' <span style="color:#cc5500">\u2501 Solid</span> = cannibalised. <span style="color:#ff8c33">\u2504 Dashed</span> = orthodox. Gap = recycling impact.':'')+'</div>';
     if(!S.cann)panel+=legendHTML([{color:COL.deficit,label:"Accumulated Deficit",key:"_ad"}]);
     else panel+=legendHTML([{color:COL.deficit,label:"Cannibalised",key:"_cd"},{color:COL.orthodox,label:"Orthodox",key:"_od"}]);
     panel+='<canvas id="ch1"></canvas>';
@@ -520,7 +520,7 @@ function renderMain(){
   tbl+='</tbody></table></div></div>'}
 
   mp.innerHTML=cards+tabsH+panel+tbl+
-    '<div class="method"><b style="color:#d4a855">Methodology:</b> Fourth Dynasty constrained throughput model. Six structures (Meidum \u2192 Menkaure). Non-linear demand. Seasonal calendar. Labour allocation prevents double-counting. Cannibalisation: overbuilt masses recycled sequentially, capped 60%/yr. Sensitivity: auto stress-test at +25/50/100%. Capacity = min(quarry, dressing, transport, placement) per ToC. Per-stream dressing (v4): core rough / Tura joint-fitting / Aswan pounded. <b>Casing correction:</b> slow fractions-of-a-mm smoothing is a TERMINAL post-completion phase (Haase 2012 via Arnold: ~2y Khufu, ~1.5y Khafre \u2014 sequential, ramps removed), NOT an in-pipeline per-block rate; it compresses the block-laying window within the reign. Granite per-element dressing remains in-pipeline (Stocks 2003). <b style="color:#cc5500">Dressing rates PROVISIONAL pending Stocks per-block audit.</b> <b>v4.1 corrections:</b> demand profiles are now normalised per structure/stream so Programme Demand conserves the entered masses exactly; programme-year count is inclusive and consistent (rows = years); the reverse solver compares required annual throughput against the same effective capacity as the forward engine; "Longest Structure" and "Programme Completion" are reported separately. Sources: Arnold (1991; 2023 rep. Haase), Haase (2012, Sokar 25), Lehner (1997), Stocks (2003), Verner (2001), Papers 2\u20134.</div>';
+    '<div class="method"><b style="color:#d4a855">What a deficit means:</b> a shortfall shows the tested capacity assumptions are inconsistent with the historical timeline — it locates where an estimate set is too low, implying the actual rates were higher (or the schedule longer). It is a test of the <i>numbers</i>, not of whether the monuments could be built; it is not evidence of impossibility. <b style="color:#d4a855">Methodology:</b> Fourth Dynasty constrained throughput model. Six structures (Meidum \u2192 Menkaure). Non-linear demand. Seasonal calendar. Labour allocation prevents double-counting. Cannibalisation: overbuilt masses recycled sequentially, capped 60%/yr. Sensitivity: auto stress-test at +25/50/100%. Capacity = min(quarry, dressing, transport, placement) per ToC. Per-stream dressing (v4): core rough / Tura joint-fitting / Aswan pounded. <b>Casing correction:</b> slow fractions-of-a-mm smoothing is a TERMINAL post-completion phase (Haase 2012 via Arnold: ~2y Khufu, ~1.5y Khafre \u2014 sequential, ramps removed), NOT an in-pipeline per-block rate; it compresses the block-laying window within the reign. Granite per-element dressing remains in-pipeline (Stocks 2003). <b style="color:#cc5500">Dressing rates PROVISIONAL pending Stocks per-block audit.</b> <b>v4.1 corrections:</b> demand profiles are now normalised per structure/stream so Programme Demand conserves the entered masses exactly; programme-year count is inclusive and consistent (rows = years); the reverse solver compares required annual throughput against the same effective capacity as the forward engine; "Longest Structure" and "Programme Completion" are reported separately. Sources: Arnold (1991; 2023 rep. Haase), Haase (2012, Sokar 25), Lehner (1997), Stocks (2003), Verner (2001), Papers 2\u20134.</div>';
 
   // Charts
   if(hasData)requestAnimationFrame(function(){
@@ -561,8 +561,9 @@ function presReadoutHTML(d){
   var sum=d.sum,res=d.res,bfs=d.bfs;
   if(!res.length)return'<div style="padding:60px;text-align:center;color:rgba(255,255,255,0.3);font-size:18px">Enable at least one structure.</div>';
   var topB=bfs[0]||"None",topBy=sum.bf[topB]||0,defMt=sum.totDef/1e6;
+  var readNote='<div style="font-size:13.5px;font-weight:400;color:rgba(255,255,255,0.5);margin-top:9px;line-height:1.45">Reading: these assumed rates cannot meet the attested timeline — so the real capacity must have been higher (or the schedule longer). A test of the numbers, not a claim of impossibility.</div>';
   var status=sum.totDef>0
-    ?'<div class="pres-status">Required programme throughput exceeds modeled capacity by <b>'+defMt.toFixed(defMt<10?2:1)+' Mt</b>, with <b>'+topB+'</b> binding for <b>'+topBy+'</b> of '+sum.py+' years.</div>'
+    ?'<div class="pres-status">Required programme throughput exceeds modeled capacity by <b>'+defMt.toFixed(defMt<10?2:1)+' Mt</b>, with <b>'+topB+'</b> binding for <b>'+topBy+'</b> of '+sum.py+' years.'+readNote+'</div>'
     :'<div class="pres-status ok">Modeled capacity meets programme demand across all <b>'+sum.py+'</b> years — no subsystem binds.</div>';
   var enCount=structs.filter(function(s){return s.enabled}).length;
   return status+'<div class="pres-cards">'+
