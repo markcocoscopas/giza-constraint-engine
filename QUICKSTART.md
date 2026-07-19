@@ -1,6 +1,6 @@
 # Fourth Dynasty Constraint Engine — Quick Start
 
-**What it answers:** *Could the attested supply capacity of Old Kingdom Egypt actually have built the six Fourth Dynasty pyramids in their historical timelines?* Short version: not at any capacity anyone has defended.
+**What it answers:** *Could the attested supply capacity of Old Kingdom Egypt actually have built the six Fourth Dynasty pyramids in their historical timelines?* Short version: under every published capacity estimate, the model still shows a shortfall against the historical timelines.
 
 **Open it:** double-click `giza-constraint-engine_V4_1.html` in any browser. No install, no internet. That's it.
 
@@ -27,7 +27,7 @@
 - **Lehner** — the orthodox baseline. Start here. → ~12.4 Mt deficit.
 - **Stocks** — more conservative rates. → bigger deficit.
 - **High** — generous rates + 40k workers. → still short.
-- **Best Case** — 800 t/d, 100k workers, 350 days. → the *only* setting that closes it (and no one defends it).
+- **Best Case** — 800 t/d, 100k workers, 350 days. → the *only* setting that closes it, at rates beyond any published estimate.
 - **Scope is yours** — **Solo** any single build (Meidum → Menkaure), toggle structures **On/Off**, or use **Sneferu Only / Giza Only / Full Dynasty**. Run one monument or any combination, not just the whole programme.
 
 ### Reading the top cards
