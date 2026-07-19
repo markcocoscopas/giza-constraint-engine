@@ -164,7 +164,7 @@ var structs=[
   {id:"khufu",name:"Great Pyramid (Khufu)",tm:6100000,cl:5955000,cs:115000,gr:8000,sy:-2580,ey:-2560,ob:8000000,fin:2,enabled:true},
   {id:"khafre",name:"Pyramid of Khafre",tm:4880000,cl:4740000,cs:120000,gr:20000,sy:-2558,ey:-2532,ob:6500000,fin:1.5,enabled:true},
   {id:"menkaure",name:"Pyramid of Menkaure",tm:700000,cl:520000,cs:60000,gr:120000,sy:-2530,ey:-2510,ob:1000000,fin:0.5,enabled:true}];
-var C={qr:340,tq:40,aq:15,dc:320,dt:45,da:4,tc:300,tt:35,at:10,pr:280,wf:25000,wd:300,lQ:35,lT:25,lD:25,lP:15};
+var C={qr:340,tq:40,aq:15,dc:340,dt:50,da:10,tc:300,tt:35,at:10,pr:280,wf:25000,wd:300,lQ:35,lT:25,lD:25,lP:15}; // on-load default == Lehner preset
 var initStructs=JSON.parse(JSON.stringify(structs)),initC=JSON.parse(JSON.stringify(C));
 var COL={core:"#cc5500",tura:"#5b98d4",aswan:"#4a9",demand:"#cc5500",capacity:"rgba(212,168,85,0.25)",net:"#e85",recycled:"#4a9",orthodox:"#ff8c33",deficit:"#cc5500",coreArea:"rgba(204,85,0,0.2)",turaArea:"rgba(91,152,212,0.15)",aswanArea:"rgba(68,170,153,0.15)"};
 var BASE_WF=25000;
@@ -663,7 +663,10 @@ function setStruct(i,key,val,neg,unit){
 }
 function soloStruct(idx){S.activeGroup="";structs.forEach(function(s,i){s.enabled=(i===idx)});render()}
 function toggleLeg(key){S.legFilter[key]=!S.legFilter[key];render()}
-function resetAll(){structs=JSON.parse(JSON.stringify(initStructs));C=JSON.parse(JSON.stringify(initC));S.legFilter={cU:true,tU:true,aU:true};S.activePreset="lehner";S.activeGroup="all";render()}
+function resetAll(){structs=JSON.parse(JSON.stringify(initStructs));C=JSON.parse(JSON.stringify(initC));
+  S.legFilter={cU:true,tU:true,aU:true};S.activePreset="lehner";S.activeGroup="all";
+  S.cann=false;S.nl=true;S.seas=true;S.present=false;document.body.classList.remove("present"); // full reset: toggles back to defaults
+  render()}
 // RFC-4180 quoting: wrap in quotes and double internal quotes for any field containing a comma, quote or newline.
 function csvCell(v){v=(v==null?"":String(v));return /[",\n\r]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v}
 function doCSV(){
