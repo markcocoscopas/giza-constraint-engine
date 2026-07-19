@@ -5,7 +5,7 @@
 
 A browser-based throughput model that tests whether the supply-side capacity of Old Kingdom Egypt could have delivered the Fourth Dynasty pyramid programme within its historically attested timelines.
 
-The engine treats six major pyramids — Sneferu's three (Meidum, Bent, and Red) and the three at Giza (Khufu, Khafre, and Menkaure), c. 2610–2510 BCE — as a single constrained system, applying Theory of Constraints to quarrying, dressing, transport, workforce, and block placement. It also implements the Cannibalisation Hypothesis (after Choi, presented via Lee, 2026), letting you test whether deliberately overbuilding structures and then carving them down eases the programme deficit or, in fact, worsens it.
+The engine treats six major pyramids — Sneferu's three (Meidum, Bent, and Red) and the three at Giza (Khufu, Khafre, and Menkaure), c. 2610–2510 BCE — as a single constrained system, applying Theory of Constraints to quarrying, dressing, transport, workforce, and block placement. The scope is yours to set: analyse the whole programme, a group (Sneferu or Giza), or a single monument in isolation — solo any one build (Meidum through Menkaure), or toggle any combination of structures on and off. It also implements the Cannibalisation Hypothesis (after Choi, presented via Lee, 2026), letting you test whether deliberately overbuilding structures and then carving them down eases the programme deficit or, in fact, worsens it.
 
 ## Running it
 

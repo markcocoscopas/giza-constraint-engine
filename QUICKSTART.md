@@ -28,7 +28,7 @@
 - **Stocks** — more conservative rates. → bigger deficit.
 - **High** — generous rates + 40k workers. → still short.
 - **Best Case** — 800 t/d, 100k workers, 350 days. → the *only* setting that closes it (and no one defends it).
-- **Sneferu Only / Giza Only / Full Dynasty** — pick which structures are in play.
+- **Scope is yours** — **Solo** any single build (Meidum → Menkaure), toggle structures **On/Off**, or use **Sneferu Only / Giza Only / Full Dynasty**. Run one monument or any combination, not just the whole programme.
 
 ### Reading the top cards
 
