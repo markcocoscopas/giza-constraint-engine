@@ -24,7 +24,8 @@ No installation, no server, and no internet connection required. Download or clo
 
 ## Documentation
 
-The full user guide — controls, presets, calculation methods, parameter sources, and recommended workflows — is in **[`giza-engine-user-guide_V3.md`](giza-engine-user-guide_V3.md)**.
+- **Quick start** — a one-page cheat sheet: **[`QUICKSTART.md`](QUICKSTART.md)**. A styled, printable version (open in any browser) is in **[`field-guide.html`](field-guide.html)**.
+- **Full user guide** — controls, presets, calculation methods, parameter sources, and recommended workflows: **[`giza-engine-user-guide_V3.md`](giza-engine-user-guide_V3.md)**.
 
 ## Key findings the tool reproduces
 
