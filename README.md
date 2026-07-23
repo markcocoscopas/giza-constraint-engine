@@ -1,5 +1,8 @@
 # Fourth Dynasty Constraint Engine
 
+# Now deprecated and archived, please go to https://github.com/markcocoscopas/pyramid-constraint-model
+
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 ![Version](https://img.shields.io/badge/version-4.1-d4a855.svg)
 
